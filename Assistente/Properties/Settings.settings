@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Assistente.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Name" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AssistenteYT</Value>
+    </Setting>
+    <Setting Name="Confidence" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0.6</Value>
+    </Setting>
+    <Setting Name="DebugMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
