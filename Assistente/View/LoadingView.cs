@@ -42,7 +42,6 @@ namespace Assistente.View
                 #endregion
 
                 #region Carrega eventos do recognizer
-                mainView.Recognizer.LoadGrammarCompleted += mainView.GrammarLoaded;
                 mainView.Recognizer.SpeechDetected += mainView.SpeechDetected;
                 mainView.Recognizer.SpeechRecognized += mainView.SpeechRecognized;
                 mainView.Recognizer.SpeechRecognitionRejected += mainView.SpeechRejected;

@@ -4,14 +4,8 @@ using Assistente.Grammatics;
 using Assistente.Log;
 using Microsoft.Speech.Recognition;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Speech.Synthesis;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Assistente.View
@@ -23,6 +17,7 @@ namespace Assistente.View
             InitializeComponent();
             Synthesizer = new SynthesizerEngine();
             Recognizer = new RecognitionEngine(new System.Globalization.CultureInfo("pt-BR"));
+            Recognizer.LoadGrammarCompleted += GrammarLoaded;
         }
 
         internal SynthesizerEngine Synthesizer { get; }
@@ -91,13 +86,11 @@ namespace Assistente.View
         {
             // TODO:
         }
-
-
         #endregion
 
         #region Recognizer Events
         internal void GrammarLoaded(object sender, LoadGrammarCompletedEventArgs e)
-            => LogPack.AddGrammarLoadLog($"Gramatica: '{e.Grammar.Name}' carregada!");
+            => LogPack.AddGrammarLoadLog($"'{e.Grammar.Name}' carregada!");
 
         internal void SpeechDetected(object sender, SpeechDetectedEventArgs e)
             => Console.WriteLine("Detectando...");

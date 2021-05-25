@@ -67,6 +67,7 @@
     <Compile Include="Grammatics\GrammarStructure.cs" />
     <Compile Include="Grammatics\GrammarSubType.cs" />
     <Compile Include="Grammatics\Grammars\GSystem.cs" />
+    <Compile Include="Grammatics\Grammars\GTime.cs" />
     <Compile Include="Grammatics\GrammarType.cs" />
     <Compile Include="Log\LogPack.cs" />
     <Compile Include="Log\Logs.cs" />

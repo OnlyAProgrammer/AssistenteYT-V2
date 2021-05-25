@@ -10,6 +10,9 @@ namespace Assistente.Grammatics.Grammars
         private static List<GrammarPoint> GetGrammarPoints() => new List<GrammarPoint>()
         {
             GetTurnOfGrammarPoint(),
+            GetRestartGrammarPoint(),
+            GetDebugModeOnGrammarPoint(),
+            GetDebugModeOffGrammarPoint(),
         };
 
         private static GrammarPoint GetTurnOfGrammarPoint()
@@ -23,6 +26,43 @@ namespace Assistente.Grammatics.Grammars
             };
 
             return new GrammarPoint(inputs, GrammarSubType.TurnOff);
+        }
+
+        private static GrammarPoint GetRestartGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Reiniciar",
+                "Reinicie",
+                "Reinicie o sistema",
+                "Reiniciar o sistema",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.Restart);
+        }
+
+        private static GrammarPoint GetDebugModeOnGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Iniciar depuração",
+                "Mostrar depuração",
+                "Iniciar janela de depuração",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.DebugModeOn);
+        }
+
+        private static GrammarPoint GetDebugModeOffGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Fechar depuração",
+                "Ocultar depuração",
+                "Fechar janela de depuração",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.DebugModeOff);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Assistente.Grammatics
         private static List<GrammarBase> GetGrammarBases() => new List<GrammarBase>()
         {
             new GSystem(GrammarType.System),
-            
+            new GTime(GrammarType.Time),
         };
     }
 }
