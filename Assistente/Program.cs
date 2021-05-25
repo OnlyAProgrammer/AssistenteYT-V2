@@ -38,7 +38,7 @@ namespace Assistente
             Application.Run(new LoadingView());
         }
 
-        private static void Debug(bool debugMode)
+        internal static void Debug(bool debugMode)
         {
             PRController.DebugMode = debugMode;
             ShowWindow(GetConsoleWindow(), debugMode ? SW_SHOW : SW_HIDE);
