@@ -2,7 +2,6 @@ D:\Projects\C#\Youtube\Assistente\Assistente\bin\Debug\Assistente.exe.config
 D:\Projects\C#\Youtube\Assistente\Assistente\bin\Debug\Assistente.exe
 D:\Projects\C#\Youtube\Assistente\Assistente\bin\Debug\Assistente.pdb
 D:\Projects\C#\Youtube\Assistente\Assistente\bin\Debug\Microsoft.Speech.dll
-D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.csprojAssemblyReference.cache
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.Properties.Resources.resources
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.View.LoadingView.resources
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.View.MainView.resources
@@ -11,3 +10,4 @@ D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.csproj.CoreCom
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.csproj.CopyComplete
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.exe
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.pdb
+D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.csproj.AssemblyReference.cache
