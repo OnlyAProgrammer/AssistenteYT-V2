@@ -12,6 +12,7 @@ namespace Assistente
     internal static class Program
     {
         private static Mutex mutex = null;
+        private static Form currentForm;
 
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetConsoleWindow();
@@ -35,7 +36,14 @@ namespace Assistente
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoadingView());
+            currentForm = new LoadingView();
+            Application.Run(currentForm);
+        }
+
+        internal static void OpenVoiceChangeView()
+        {
+            if (currentForm is MainView mv)
+                mv.OpenVoiceChangeView();
         }
 
         internal static void Debug(bool debugMode)
@@ -51,6 +59,8 @@ namespace Assistente
             origin.Visible = false;
             origin.Enabled = false;
             origin.ShowInTaskbar = false;
+
+            currentForm = target;
 
             target.Closed += (s, e) => origin.Close();
             target.Show();

@@ -7,6 +7,7 @@
         Restart,
         DebugModeOn,
         DebugModeOff,
+        VoiceChange,
 
         // Time
         WhatHourIs,

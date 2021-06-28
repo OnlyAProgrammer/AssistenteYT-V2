@@ -1,4 +1,5 @@
 ﻿using Assistente.Grammatics;
+using Assistente.View;
 using System;
 
 namespace Assistente.Execution
@@ -16,6 +17,7 @@ namespace Assistente.Execution
                 case GrammarSubType.Restart: return CommandType.x0RestartSystem.ToString();
                 case GrammarSubType.DebugModeOn: return CommandType.x0DebugOnSystem.ToString();
                 case GrammarSubType.DebugModeOff: return CommandType.x0DebugOffSystem.ToString();
+                case GrammarSubType.VoiceChange: return CommandType.x0VoiceChangeSystem.ToString();
 
                 // GTime
                 case GrammarSubType.WhatHourIs: return $"São {datetime.ToLongTimeString()}";
@@ -35,6 +37,7 @@ namespace Assistente.Execution
                 case CommandType.x0RestartSystem: return "Reiniciando...";
                 case CommandType.x0DebugOnSystem: return "Iniciando janela de depuração";
                 case CommandType.x0DebugOffSystem: return "Fechando janela de depuração";
+                case CommandType.x0VoiceChangeSystem: return "Abrindo janela de configuração de voz";
                 default: return "Entrada de commando inválido em Execute";
             }
         }
@@ -47,6 +50,7 @@ namespace Assistente.Execution
                 case CommandType.x0RestartSystem: Program.Restart(); break;
                 case CommandType.x0DebugOnSystem: Program.Debug(true); break;
                 case CommandType.x0DebugOffSystem: Program.Debug(false); break;
+                case CommandType.x0VoiceChangeSystem: Program.OpenVoiceChangeView(); break;
             }
         }
 

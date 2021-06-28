@@ -60,6 +60,7 @@
     <Compile Include="DataControl\RWController.cs" />
     <Compile Include="Engine\RecognitionEngine.cs" />
     <Compile Include="Engine\SynthesizerEngine.cs" />
+    <Compile Include="Engine\Voice.cs" />
     <Compile Include="Execution\CommandType.cs" />
     <Compile Include="Execution\Executer.cs" />
     <Compile Include="Grammatics\GrammarBase.cs" />
@@ -88,6 +89,12 @@
     <Compile Include="View\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\VoiceChangeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VoiceChangeView.Designer.cs">
+      <DependentUpon>VoiceChangeView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -103,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\VoiceChangeView.resx">
+      <DependentUpon>VoiceChangeView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -1,5 +1,6 @@
 ﻿using System.Speech.Synthesis;
 using System;
+using System.Collections.Generic;
 
 namespace Assistente.Engine
 {
@@ -21,6 +22,9 @@ namespace Assistente.Engine
             Synthesizer.SpeakStarted += Synthesizer_SpeakStarted;
             Synthesizer.SpeakProgress += Synthesizer_SpeakProgress;
             Synthesizer.SpeakCompleted += Synthesizer_SpeakCompleted;
+
+            if (!string.IsNullOrEmpty(PRController.VoiceName) && !string.IsNullOrWhiteSpace(PRController.VoiceName))
+                Synthesizer.SelectVoice(PRController.VoiceName);
         }
 
         private SpeechSynthesizer Synthesizer { get; }
@@ -46,5 +50,37 @@ namespace Assistente.Engine
 
         internal void SpeakSync(string[] options)
             => SpeakSync(options[new Random().Next(0, options.Length)]);
+
+        internal static IReadOnlyCollection<InstalledVoice> GetVoices()
+            => new SpeechSynthesizer().GetInstalledVoices();
+
+        internal bool ApplyVoice(string voiceName)
+        {
+            try
+            {
+                Synthesizer.SelectVoice(voiceName);
+                return true;
+            } catch
+            {
+                return false;
+            }
+            
+        }
+
+        internal bool TestVoice(string voiceName)
+        {
+            try
+            {
+                var currentVoice = Synthesizer.Voice.Name;
+                Synthesizer.SelectVoice(voiceName);
+                SpeakSync("Testando voz, 1, 2, 3");
+                Synthesizer.SelectVoice(currentVoice);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

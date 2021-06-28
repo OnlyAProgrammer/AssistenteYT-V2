@@ -12,6 +12,9 @@ namespace Assistente.View
 {
     internal sealed partial class MainView : Form
     {
+        // SubViews
+        private VoiceChangeView voiceChangeView;
+
         internal MainView()
         {
             InitializeComponent();
@@ -101,5 +104,39 @@ namespace Assistente.View
         internal void SpeechRejected(object sender, SpeechRecognitionRejectedEventArgs e)
             => Rejected(e.Result.Grammar == null ? "" : e.Result.Grammar.Name, e.Result.Text, e.Result.Confidence);
         #endregion
+
+        internal void OpenVoiceChangeView()
+        {
+            if (voiceChangeView != null)
+            {
+                voiceChangeView.Dispose();
+                voiceChangeView = null;
+            }
+            voiceChangeView = new VoiceChangeView(SynthesizerEngine.GetVoices());
+            voiceChangeView.TestVoice += View_TestVoice;
+            voiceChangeView.ApplyVoice += View_ApplyVoice;
+            voiceChangeView.Show();
+        }
+
+        private void View_ApplyVoice(string voiceName)
+        {
+            LogPack.AddMessageLog($"Aplicando voz: {voiceName}");
+            Synthesizer.ApplyVoice(voiceName);
+            PRController.VoiceName = voiceName;
+            PRController.Save();
+            Synthesizer.Speak("Voz aplicada com sucesso!");
+
+            if (voiceChangeView != null)
+            {
+                voiceChangeView.Dispose();
+                voiceChangeView = null;
+            }
+        }
+
+        private void View_TestVoice(string voiceName)
+        {
+            LogPack.AddMessageLog($"Testando voz: {voiceName}");
+            Synthesizer.TestVoice(voiceName);
+        }
     }
 }
