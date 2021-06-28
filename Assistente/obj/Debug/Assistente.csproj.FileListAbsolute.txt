@@ -11,3 +11,4 @@ D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.csproj.CopyCom
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.exe
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.pdb
 D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.csproj.AssemblyReference.cache
+D:\Projects\C#\Youtube\Assistente\Assistente\obj\Debug\Assistente.View.VoiceChangeView.resources

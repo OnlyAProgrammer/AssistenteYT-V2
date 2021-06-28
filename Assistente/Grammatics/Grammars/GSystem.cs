@@ -13,6 +13,7 @@ namespace Assistente.Grammatics.Grammars
             GetRestartGrammarPoint(),
             GetDebugModeOnGrammarPoint(),
             GetDebugModeOffGrammarPoint(),
+            GetVoiceChangeGrammarPoint(),
         };
 
         private static GrammarPoint GetTurnOfGrammarPoint()
@@ -63,6 +64,18 @@ namespace Assistente.Grammatics.Grammars
             };
 
             return new GrammarPoint(inputs, GrammarSubType.DebugModeOff);
+        }
+
+        private static GrammarPoint GetVoiceChangeGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Alterar voz",
+                "Mudar voz",
+                "Trocar voz",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.VoiceChange);
         }
     }
 }

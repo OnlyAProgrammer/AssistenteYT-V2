@@ -32,6 +32,12 @@
             set { Properties.Settings.Default.DataPath = value; }
         }
 
+        internal static string VoiceName
+        {
+            get { return Properties.Settings.Default.VoiceName; }
+            set { Properties.Settings.Default.VoiceName = value; }
+        }
+
         internal static void Save() => Properties.Settings.Default.Save();
     }
 }
