@@ -7,5 +7,7 @@
         x0DebugOnSystem,
         x0DebugOffSystem,
         x0VoiceChangeSystem,
+        x0DiscordMute,
+        x0DiscordDesmute,
     }
 }

@@ -33,5 +33,8 @@ namespace Assistente.Log
 
         internal static void AddRecognizedLog(string operation, string result)
             => AddLog(LogType.RECOGNIZED, operation, result, true);
+
+        internal static void AddProcessResultLog(string message)
+            => AddLog(LogType.OPERATION, message, null, true);
     }
 }

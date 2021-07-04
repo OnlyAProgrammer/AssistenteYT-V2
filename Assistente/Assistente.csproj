@@ -68,6 +68,7 @@
     <Compile Include="Grammatics\GrammarPoint.cs" />
     <Compile Include="Grammatics\GrammarStructure.cs" />
     <Compile Include="Grammatics\GrammarSubType.cs" />
+    <Compile Include="Grammatics\Grammars\GPrograms.cs" />
     <Compile Include="Grammatics\Grammars\GSystem.cs" />
     <Compile Include="Grammatics\Grammars\GTime.cs" />
     <Compile Include="Grammatics\GrammarType.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="Log\LogType.cs" />
     <Compile Include="PRController.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Programs\HotKey.cs" />
+    <Compile Include="Programs\ProgramSend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\LoadingView.cs">
       <SubType>Form</SubType>

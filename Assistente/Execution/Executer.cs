@@ -25,6 +25,9 @@ namespace Assistente.Execution
                 case GrammarSubType.WhatDayIs: return $"Hoje é dia {datetime.Day}";
                 case GrammarSubType.WhatDayOfWeekIs: return $"Hoje é {GetDayOfWeekTranslate(datetime.DayOfWeek)}";
 
+                // GPrograms
+                case GrammarSubType.DiscordMute: return CommandType.x0DiscordMute.ToString();
+                case GrammarSubType.DiscordDesmute: return CommandType.x0DiscordDesmute.ToString();
                 default: return "Entrada de sub-gramatica inválida";
             }
         }
@@ -38,12 +41,16 @@ namespace Assistente.Execution
                 case CommandType.x0DebugOnSystem: return "Iniciando janela de depuração";
                 case CommandType.x0DebugOffSystem: return "Fechando janela de depuração";
                 case CommandType.x0VoiceChangeSystem: return "Abrindo janela de configuração de voz";
+                case CommandType.x0DiscordMute: return "Mutando discord";
+                case CommandType.x0DiscordDesmute: return "Desmutando discord";
                 default: return "Entrada de commando inválido em Execute";
             }
         }
 
-        internal static void ExecuteCommand(CommandType commandType)
+        internal static void ExecuteCommand(CommandType commandType, out string result)
         {
+            result = "";
+
             switch (commandType)
             {
                 case CommandType.x0TurnOffSystem: Program.Exit(); break;
@@ -51,6 +58,18 @@ namespace Assistente.Execution
                 case CommandType.x0DebugOnSystem: Program.Debug(true); break;
                 case CommandType.x0DebugOffSystem: Program.Debug(false); break;
                 case CommandType.x0VoiceChangeSystem: Program.OpenVoiceChangeView(); break;
+                case CommandType.x0DiscordMute:
+                    {
+                        var sucess = Programs.ProgramSend.SendHotKeyToProcess("discord", Programs.HotKey.CTRL, "'");
+                        result = sucess ? "Discord mutado com sucesso!" : "Houve uma falha ao tentar mutar";
+                        break;
+                    }
+                case CommandType.x0DiscordDesmute:
+                    {
+                        var sucess = Programs.ProgramSend.SendHotKeyToProcess("discord", Programs.HotKey.CTRL, "'");
+                        result = sucess ? "Discord desmutado com sucesso!" : "Houve uma falha ao tentar desmutar";
+                        break;
+                    }
             }
         }
 
