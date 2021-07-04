@@ -15,6 +15,11 @@
         WhatDayIs,
         WhatDayOfWeekIs,
 
+
         // Weather
+
+        // Programs
+        DiscordMute,
+        DiscordDesmute,
     }
 }
