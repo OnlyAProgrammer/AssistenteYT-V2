@@ -2,6 +2,8 @@
 {
     internal enum GrammarSubType
     {
+        Null,
+
         // System
         TurnOff,
         Restart,
@@ -16,5 +18,11 @@
         WhatDayOfWeekIs,
 
         // Weather
+
+        // Programs
+        OpenProgram,
+        CloseProgram,
+        DiscordMute,
+        DiscordDesmute,
     }
 }

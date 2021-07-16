@@ -39,6 +39,7 @@ namespace Assistente.Grammatics
         {
             new GSystem(GrammarType.System),
             new GTime(GrammarType.Time),
+            new GPrograms(GrammarType.Programs)
         };
     }
 }

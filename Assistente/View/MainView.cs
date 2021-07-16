@@ -46,7 +46,28 @@ namespace Assistente.View
             foreach (var gp in gGrammar.GrammarPoints)
             {
                 if (gp.Inputs.Any(s => s == input))
-                    result = Executer.Execute(gp.GrammarSubType);
+                {
+                    string[] args = new string[3];
+
+                    if (gp.GrammarSubType.Equals(GrammarSubType.OpenProgram) ||
+                        gp.GrammarSubType.Equals(GrammarSubType.CloseProgram))
+                    {
+                        args[0] = gp.GrammarSubType.ToString();
+
+                        foreach(var prog in Programs.ProgramManagement.ProgramsDic.Keys)
+                        {
+                            if (input.Contains(prog))
+                            {
+                                args[1] = Programs.ProgramManagement.ProgramsDic[prog].ProcessName;
+                                args[2] = Programs.ProgramManagement.ProgramsDic[prog].UseShell.ToString();
+                                break;
+                            }
+                        }
+                    }
+
+                    result = Executer.Execute(gp.GrammarSubType, args);
+                    break;
+                }
             }
 
             // Executa um commando caso a entrada seja uma entrada de comando
