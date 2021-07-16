@@ -1,12 +1,12 @@
 ﻿using Assistente.Grammatics;
-using Assistente.View;
+using Assistente.Programs;
 using System;
 
 namespace Assistente.Execution
 {
     internal static class Executer
     {
-        internal static string Execute(GrammarSubType grammarSubType)
+        internal static string Execute(GrammarSubType grammarSubType, string[] args = null)
         {
             var datetime = DateTime.Now;
 
@@ -25,6 +25,14 @@ namespace Assistente.Execution
                 case GrammarSubType.WhatDayIs: return $"Hoje é dia {datetime.Day}";
                 case GrammarSubType.WhatDayOfWeekIs: return $"Hoje é {GetDayOfWeekTranslate(datetime.DayOfWeek)}";
 
+                // GPrograms
+                case GrammarSubType.DiscordMute: return CommandType.x0DiscordMute.ToString();
+                case GrammarSubType.DiscordDesmute: return CommandType.x0DiscordDesmute.ToString();
+
+                case GrammarSubType.OpenProgram:
+                case GrammarSubType.CloseProgram:
+                    return ConvertArgument(args).ToString();
+
                 default: return "Entrada de sub-gramatica inválida";
             }
         }
@@ -38,6 +46,12 @@ namespace Assistente.Execution
                 case CommandType.x0DebugOnSystem: return "Iniciando janela de depuração";
                 case CommandType.x0DebugOffSystem: return "Fechando janela de depuração";
                 case CommandType.x0VoiceChangeSystem: return "Abrindo janela de configuração de voz";
+
+                case CommandType.x0DiscordMute: return "Mutando discord";
+                case CommandType.x0DiscordDesmute: return "Desmutando discord";
+                case CommandType.x0OpenProgram: return "Abrindo...";
+                case CommandType.x0CloseProgram: return "Encerrando...";
+
                 default: return "Entrada de commando inválido em Execute";
             }
         }
@@ -67,6 +81,26 @@ namespace Assistente.Execution
                 case DayOfWeek.Saturday: return "Sábado";
                 default: return dayOfWeek.ToString();
             }
+        }
+
+        private static CommandType ConvertArgument(string[] args)
+        {
+            if (args[0] == "OpenProgram")
+            {
+                var sucess = ProgramManagement.OpenProgram(args[1], bool.Parse(args[2]));
+                // TODO
+
+                return CommandType.x0OpenProgram;
+            }
+            else if (args[0] == "CloseProgram")
+            {
+                var sucess = ProgramManagement.CloseProgram(args[1]);
+                // TODO
+
+                return CommandType.x0CloseProgram;
+            }
+
+            return CommandType.x0InvalidCommand;
         }
     }
 }
