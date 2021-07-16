@@ -71,12 +71,20 @@ namespace Assistente.View
             }
 
             // Executa um commando caso a entrada seja uma entrada de comando
-            if (Enum.TryParse<Execution.CommandType>(result, out var commandType))
+            if (Enum.TryParse<CommandType>(result, out var commandType))
             {
                 result = Executer.Execute(commandType);
                 LogPack.AddRecognizedLog(input, result);
                 Synthesizer.SpeakSync(result);
-                Executer.ExecuteCommand(commandType);
+
+                Executer.ExecuteCommand(commandType, out result);
+
+                if (!string.IsNullOrEmpty(result) && !string.IsNullOrWhiteSpace(result))
+                {
+                    Synthesizer.Speak(result);
+                    LogPack.AddProcessResultLog($"Resultado da última operação: \"{result}\"");
+                }
+
                 return;
             }
 

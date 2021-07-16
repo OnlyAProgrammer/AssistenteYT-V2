@@ -9,5 +9,6 @@
         WARNING,
         ERROR,
         GRAMMAR,
+        OPERATION,
     }
 }
