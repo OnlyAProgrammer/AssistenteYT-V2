@@ -1,5 +1,6 @@
 ﻿using Assistente.Grammatics;
 using Assistente.Programs;
+using Assistente.View;
 using System;
 
 namespace Assistente.Execution
@@ -13,6 +14,8 @@ namespace Assistente.Execution
             switch (grammarSubType)
             {
                 // GSystem
+                case GrammarSubType.CallAssistente: return CommandType.x0CallAssistente.ToString();
+                case GrammarSubType.SilenceMode: return CommandType.x0SilenceMode.ToString();
                 case GrammarSubType.TurnOff: return CommandType.x0TurnOffSystem.ToString();
                 case GrammarSubType.Restart: return CommandType.x0RestartSystem.ToString();
                 case GrammarSubType.DebugModeOn: return CommandType.x0DebugOnSystem.ToString();
@@ -41,6 +44,9 @@ namespace Assistente.Execution
         {
             switch (commandType)
             {
+                case CommandType.x0CallAssistente: return Builder.CallAssistentReturns[
+                    new Random().Next(0, Builder.CallAssistentReturns.Length)];
+                case CommandType.x0SilenceMode: return "Modo silencioso ativado";
                 case CommandType.x0TurnOffSystem: return "Desligando...";
                 case CommandType.x0RestartSystem: return "Reiniciando...";
                 case CommandType.x0DebugOnSystem: return "Iniciando janela de depuração";
@@ -56,15 +62,31 @@ namespace Assistente.Execution
             }
         }
 
-        internal static void ExecuteCommand(CommandType commandType)
+        internal static void ExecuteCommand(CommandType commandType, out string result)
         {
+            result = "";
+
             switch (commandType)
             {
+                case CommandType.x0CallAssistente: MainView.RecognitionState = Engine.RecognitionState.NORMAL; break;
+                case CommandType.x0SilenceMode: MainView.RecognitionState = Engine.RecognitionState.SILENCE_MODE; break;
                 case CommandType.x0TurnOffSystem: Program.Exit(); break;
                 case CommandType.x0RestartSystem: Program.Restart(); break;
                 case CommandType.x0DebugOnSystem: Program.Debug(true); break;
                 case CommandType.x0DebugOffSystem: Program.Debug(false); break;
                 case CommandType.x0VoiceChangeSystem: Program.OpenVoiceChangeView(); break;
+                case CommandType.x0DiscordMute:
+                    {
+                        var sucess = ProgramSend.SendHotKeyToProcess("discord", Programs.HotKey.CTRL, "'");
+                        result = sucess ? "Discord mutado com sucesso!" : "Houve uma falha ao tentar mutar";
+                        break;
+                    }
+                case CommandType.x0DiscordDesmute:
+                    {
+                        var sucess = ProgramSend.SendHotKeyToProcess("discord", Programs.HotKey.CTRL, "'");
+                        result = sucess ? "Discord desmutado com sucesso!" : "Houve uma falha ao tentar desmutar";
+                        break;
+                    }
             }
         }
 

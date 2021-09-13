@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="DataControl\RWController.cs" />
     <Compile Include="Engine\RecognitionEngine.cs" />
+    <Compile Include="Engine\RecognitionState.cs" />
     <Compile Include="Engine\SynthesizerEngine.cs" />
     <Compile Include="Engine\Voice.cs" />
     <Compile Include="Execution\CommandType.cs" />

@@ -14,6 +14,13 @@ namespace Assistente.Grammatics
             "Não compreendi"
         };
 
+        internal static string[] CallAssistentReturns = new string[]
+        {
+            "Oi",
+            "Pronto",
+            "Estou aqui",
+        };
+
         internal static List<Grammar> GetGrammars()
         {
             var grammars = new List<Grammar>();

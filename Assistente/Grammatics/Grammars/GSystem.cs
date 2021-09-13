@@ -9,12 +9,37 @@ namespace Assistente.Grammatics.Grammars
 
         private static List<GrammarPoint> GetGrammarPoints() => new List<GrammarPoint>()
         {
+            GetCallAssistenteGrammarPoint(),
+            GetSilenceModeGrammarPoint(),
             GetTurnOfGrammarPoint(),
             GetRestartGrammarPoint(),
             GetDebugModeOnGrammarPoint(),
             GetDebugModeOffGrammarPoint(),
             GetVoiceChangeGrammarPoint(),
         };
+
+        private static GrammarPoint GetCallAssistenteGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Asssitente",   
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.CallAssistente);
+        }
+
+        private static GrammarPoint GetSilenceModeGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Modo silencioso",
+                "Ativar modo silencioso",
+                "Iniciar modo silencioso",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.SilenceMode);
+        }
+
 
         private static GrammarPoint GetTurnOfGrammarPoint()
         {
