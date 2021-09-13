@@ -12,7 +12,6 @@ namespace Assistente.Grammatics
                 case GrammarType.Time: return new GTime(grammarType);
                 case GrammarType.Programs: return new GPrograms(grammarType);
                 case GrammarType.Weather:
-                case GrammarType.Programs: return new GPrograms(grammarType);
                 default: return null;
             }
         }

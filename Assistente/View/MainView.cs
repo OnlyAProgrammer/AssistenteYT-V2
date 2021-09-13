@@ -1,6 +1,7 @@
 ﻿using Assistente.Engine;
 using Assistente.Execution;
 using Assistente.Grammatics;
+using Assistente.Grammatics.Grammars;
 using Assistente.Log;
 using Microsoft.Speech.Recognition;
 using System;
@@ -12,6 +13,8 @@ namespace Assistente.View
 {
     internal sealed partial class MainView : Form
     {
+        internal static RecognitionState RecognitionState = RecognitionState.NORMAL;
+
         // SubViews
         private VoiceChangeView voiceChangeView;
 
@@ -29,6 +32,17 @@ namespace Assistente.View
         private void MainView_Load(object sender, EventArgs e)
             => Recognizer.Start();
 
+        private void Rejected(string grammarName, string input, float confidence)
+        {
+            if (!Enum.TryParse<GrammarType>(grammarName, out var grammarType))
+                LogPack.AddWarningLog($"TryParse falhou em extrair de '{grammarName}'", $"Parsing result: {grammarType}");
+
+            LogPack.AddRejectedLog($"Entrada recebida: '{input}' com {confidence} de conficende na gramatica '{grammarType}'", "Entrada rejeitada");
+
+            if (confidence > 0.25 && RecognitionState != RecognitionState.SILENCE_MODE)
+                Synthesizer.Speak(Builder.RejectedReturns);
+        }
+
         private void Recognized(string grammarName, string input, float confidence)
         {
             if (confidence < PRController.Confidence)
@@ -43,9 +57,39 @@ namespace Assistente.View
             var result = string.Empty;
             var gGrammar = GrammarStructure.GetGrammarByType(grammarType);
 
+            switch (RecognitionState)
+            {
+                case RecognitionState.SILENCE_MODE:
+                    {
+                        if (!(gGrammar is GSystem gs)) return;
+
+                        foreach(var gp in gs.GrammarPoints)
+                        {
+                            // Se o input for diferente das entradas na lista
+                            // ou o gramamrSubType for diferente de CallAssistente
+                            // passa para o prox valor
+
+                            if (!gp.Inputs.Any(s => s == input) ||
+                                gp.GrammarSubType != GrammarSubType.CallAssistente)
+                                continue;
+
+                            result = Executer.Execute(GrammarSubType.CallAssistente);
+                            SpeakExecutionResult(input, gGrammar, result);
+                            break;
+                        }
+
+                        break;
+                    }
+                case RecognitionState.NORMAL: default:
+                    SpeakExecutionResult(input, gGrammar, result); break;
+            }
+        }
+
+        private void SpeakExecutionResult(string input, GrammarBase gGrammar, string result)
+        {
             foreach (var gp in gGrammar.GrammarPoints)
             {
-                if (gp.Inputs.Any(s => s == input))
+                if (gp.Inputs.Any(s => s == input)) // bom dia == input
                 {
                     string[] args = new string[3];
 
@@ -54,7 +98,7 @@ namespace Assistente.View
                     {
                         args[0] = gp.GrammarSubType.ToString();
 
-                        foreach(var prog in Programs.ProgramManagement.ProgramsDic.Keys)
+                        foreach (var prog in Programs.ProgramManagement.ProgramsDic.Keys)
                         {
                             if (input.Contains(prog))
                             {
@@ -90,17 +134,6 @@ namespace Assistente.View
 
             LogPack.AddRecognizedLog(input, result);
             Synthesizer.Speak(result);
-        }
-
-        private void Rejected(string grammarName, string input, float confidence)
-        {
-            if (!Enum.TryParse<GrammarType>(grammarName, out var grammarType))
-                LogPack.AddWarningLog($"TryParse falhou em extrair de '{grammarName}'", $"Parsing result: {grammarType}");
-
-            LogPack.AddRejectedLog($"Entrada recebida: '{input}' com {confidence} de conficende na gramatica '{grammarType}'", "Entrada rejeitada");
-
-            if (confidence > 0.25)
-                Synthesizer.Speak(Builder.RejectedReturns);
         }
 
         #region Synthesizer Events

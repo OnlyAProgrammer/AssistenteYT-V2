@@ -16,11 +16,13 @@ namespace Assistente.View
 
         private void LoadingView_Load(object sender, EventArgs @event)
         {
+            LogPack.AddMessageLog("LoadingView carregado");
             LogPack.AddMessageLog("Iniciando carregamento do sistema");
 
             try
             {
                 var syn = new SynthesizerEngine();
+                LogPack.AddMessageLog("SynthesizerEngine criado");
                 syn.Speak("Carregando");
 
                 #region MainView

@@ -1,17 +1,14 @@
-﻿using Assistente.View;
+﻿using Assistente.Log;
+using Assistente.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Assistente
 {
     internal static class Program
     {
-        private static Mutex mutex = null;
         private static Form currentForm;
 
         [DllImport("kernel32.dll")]
@@ -26,16 +23,19 @@ namespace Assistente
         [STAThread]
         internal static void Main()
         {
-            mutex = new Mutex(true, PRController.Name, out var createNew);
+            _ = new Mutex(true, PRController.Name, out var createNew);
+            LogPack.AddMessageLog("Instancia mutex criado");
 
             if (!createNew)
             {
                 MessageBox.Show($"{PRController.Name} já esta aberto, não é possível executar dois ao mesmo tempo!", "Aviso", MessageBoxButtons.OK);
                 return;
             }
+            LogPack.AddMessageLog("Verificação mutex, programa não estava iniciado, inciando o programa.");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            LogPack.AddMessageLog("Iniciando LoadingView");
             currentForm = new LoadingView();
             Application.Run(currentForm);
         }

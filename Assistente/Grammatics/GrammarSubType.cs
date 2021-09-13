@@ -5,6 +5,8 @@
         Null,
 
         // System
+        CallAssistente,
+        SilenceMode,
         TurnOff,
         Restart,
         DebugModeOn,
