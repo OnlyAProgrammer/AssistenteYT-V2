@@ -40,12 +40,6 @@ namespace Assistente
             Application.Run(currentForm);
         }
 
-        internal static void OpenVoiceChangeView()
-        {
-            if (currentForm is MainView mv)
-                mv.OpenVoiceChangeView();
-        }
-
         internal static void Debug(bool debugMode)
         {
             PRController.DebugMode = debugMode;
@@ -75,5 +69,17 @@ namespace Assistente
         internal static void Restart() => Application.Restart();
 
         internal static void GenerateLog() => DataControl.RWController.SaveLog();
+
+        internal static void OpenVoiceChangeView()
+        {
+            if (currentForm is MainView mv)
+                mv.OpenVoiceChangeView();
+        }
+
+        internal static void OpenCommandsList()
+        {
+            if (currentForm is MainView mv)
+                mv.OpenCommandsList();
+        }
     }
 }

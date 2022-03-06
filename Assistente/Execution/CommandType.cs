@@ -17,5 +17,6 @@
         x0DiscordMute,
         x0DiscordDesmute,
         x0InvalidCommand,
+        x0ShowCommandListSystem,
     }
 }

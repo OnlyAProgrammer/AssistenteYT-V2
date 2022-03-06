@@ -14,6 +14,7 @@ namespace Assistente.Grammatics.Grammars
             {
                 GetDiscordMuteGrammarPoint(),
                 GetDiscordDesmuteGrammarPoint(),
+                GetCommandsListGrammarPoint(),
             };
         }
 
@@ -100,6 +101,18 @@ namespace Assistente.Grammatics.Grammars
             }
 
             return new GrammarPoint(inputs, GrammarSubType.Null);
+        }
+
+        private static GrammarPoint GetCommandsListGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Lista de comandos",
+                "Me mostre a lista de comandos",
+                "Mostrar lista de comandos"
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.CommandsList);
         }
     }
 }

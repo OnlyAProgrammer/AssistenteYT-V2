@@ -36,6 +36,8 @@ namespace Assistente.Execution
                 case GrammarSubType.CloseProgram:
                     return ConvertArgument(args).ToString();
 
+                case GrammarSubType.CommandsList: return CommandType.x0ShowCommandListSystem.ToString();
+
                 default: return "Entrada de sub-gramatica inválida";
             }
         }
@@ -57,6 +59,7 @@ namespace Assistente.Execution
                 case CommandType.x0DiscordDesmute: return "Desmutando discord";
                 case CommandType.x0OpenProgram: return "Abrindo...";
                 case CommandType.x0CloseProgram: return "Encerrando...";
+                case CommandType.x0ShowCommandListSystem: return "Abrindo lista de comandos";
 
                 default: return "Entrada de commando inválido em Execute";
             }
@@ -87,6 +90,15 @@ namespace Assistente.Execution
                         result = sucess ? "Discord desmutado com sucesso!" : "Houve uma falha ao tentar desmutar";
                         break;
                     }
+                case CommandType.x0ShowCommandListSystem:
+                    {
+                        Program.OpenCommandsList();
+                        result = "Lista de comandos iniciada";
+                        break;
+                    }
+                default:
+                    result = "Sem função especificada para esse comando";
+                    break;
             }
         }
 

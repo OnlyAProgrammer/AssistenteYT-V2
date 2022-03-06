@@ -17,6 +17,7 @@ namespace Assistente.View
 
         // SubViews
         private VoiceChangeView voiceChangeView;
+        private CommandListView commandListView;
 
         internal MainView()
         {
@@ -178,6 +179,18 @@ namespace Assistente.View
             voiceChangeView.TestVoice += View_TestVoice;
             voiceChangeView.ApplyVoice += View_ApplyVoice;
             voiceChangeView.Show();
+        }
+
+        internal void OpenCommandsList()
+        {
+            if (commandListView != null)
+            {
+                commandListView.Dispose();
+                commandListView = null;
+            }
+
+            commandListView = new CommandListView();
+            commandListView.Show();
         }
 
         private void View_ApplyVoice(string voiceName)

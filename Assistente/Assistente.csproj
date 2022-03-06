@@ -64,6 +64,7 @@
     <Compile Include="Engine\Voice.cs" />
     <Compile Include="Execution\CommandType.cs" />
     <Compile Include="Execution\Executer.cs" />
+    <Compile Include="Grammatics\CommandOrganizer.cs" />
     <Compile Include="Grammatics\GrammarBase.cs" />
     <Compile Include="Grammatics\Builder.cs" />
     <Compile Include="Grammatics\GrammarChainPoint.cs" />
@@ -84,6 +85,12 @@
     <Compile Include="Programs\ProgramManagement.cs" />
     <Compile Include="Programs\ProgramSend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\CommandListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CommandListView.Designer.cs">
+      <DependentUpon>CommandListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LoadingView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +119,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\CommandListView.resx">
+      <DependentUpon>CommandListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LoadingView.resx">
       <DependentUpon>LoadingView.cs</DependentUpon>
     </EmbeddedResource>

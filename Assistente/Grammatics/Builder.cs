@@ -1,5 +1,4 @@
-﻿using Assistente.Grammatics.Grammars;
-using Microsoft.Speech.Recognition;
+﻿using Microsoft.Speech.Recognition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +45,7 @@ namespace Assistente.Grammatics
             return grammars;
         }
 
-        internal static Dictionary<string, Dictionary<string, List<string>>> GetVoiceCommands()
+        internal static CommandOrganizer GetVoiceCommands()
         {
             var voiceCommandsDict = new Dictionary<string, Dictionary<string, List<string>>>();
             var grammars = GetGrammarBases();
@@ -61,7 +60,7 @@ namespace Assistente.Grammatics
                 voiceCommandsDict.Add(g.Name, commands);
             }
 
-            return voiceCommandsDict;
+            return new CommandOrganizer(voiceCommandsDict);
         }
 
         private static List<GrammarBase> GetGrammarBases()
