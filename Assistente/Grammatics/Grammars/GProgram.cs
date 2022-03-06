@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Assistente.Grammatics.Grammars
 {
-    internal sealed class GPrograms : GrammarBase
+    internal sealed class GProgram : GrammarBase
     {
-        internal GPrograms(GrammarType grammarType) : base(grammarType.ToString(), GetGrammarPoints(), GetGrammarChainPoints()) { }
+        internal GProgram() : base(GrammarType.Programs.ToString(), GetGrammarPoints(), GetGrammarChainPoints()) { }
 
         private static List<GrammarPoint> GetGrammarPoints()
         {

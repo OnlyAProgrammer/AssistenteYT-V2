@@ -4,8 +4,7 @@ namespace Assistente.Grammatics.Grammars
 {
     internal sealed class GSystem : GrammarBase
     {
-        internal GSystem(GrammarType grammarType) 
-            : base(grammarType.ToString(), GetGrammarPoints()) { }
+        internal GSystem() : base(GrammarType.System.ToString(), GetGrammarPoints()) { }
 
         private static List<GrammarPoint> GetGrammarPoints() => new List<GrammarPoint>()
         {

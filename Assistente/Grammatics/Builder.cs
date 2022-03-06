@@ -1,6 +1,9 @@
 ﻿using Assistente.Grammatics.Grammars;
 using Microsoft.Speech.Recognition;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Assistente.Grammatics
 {
@@ -24,6 +27,7 @@ namespace Assistente.Grammatics
         internal static List<Grammar> GetGrammars()
         {
             var grammars = new List<Grammar>();
+            _ = GetVoiceCommands();
             var grammarBases = GetGrammarBases();
 
             foreach (var gb in grammarBases)
@@ -42,11 +46,34 @@ namespace Assistente.Grammatics
             return grammars;
         }
 
-        private static List<GrammarBase> GetGrammarBases() => new List<GrammarBase>()
+        internal static Dictionary<string, Dictionary<string, List<string>>> GetVoiceCommands()
         {
-            new GSystem(GrammarType.System),
-            new GTime(GrammarType.Time),
-            new GPrograms(GrammarType.Programs)
-        };
+            var voiceCommandsDict = new Dictionary<string, Dictionary<string, List<string>>>();
+            var grammars = GetGrammarBases();
+
+            foreach (var g in grammars)
+            {
+                var commands = new Dictionary<string, List<string>>();
+
+                foreach (var point in g.GrammarPoints)
+                    commands.Add(point.GrammarSubType.ToString(), point.Inputs.ToList());
+
+                voiceCommandsDict.Add(g.Name, commands);
+            }
+
+            return voiceCommandsDict;
+        }
+
+        private static List<GrammarBase> GetGrammarBases()
+        {
+            var nspace = "Assistente.Grammatics.Grammars";
+
+            var typeList = (from o in Assembly.GetExecutingAssembly().GetTypes()
+                            where o.IsClass && o.Namespace == nspace
+                            select o).ToArray();
+
+            return (from gType in typeList 
+                    select (GrammarBase)Activator.CreateInstance(gType, true)).ToList();
+        }
     }
 }

@@ -2,9 +2,8 @@
 {
     internal enum GrammarType
     {
+        Programs,
         System,
         Time,
-        Weather,
-        Programs,
     }
 }
