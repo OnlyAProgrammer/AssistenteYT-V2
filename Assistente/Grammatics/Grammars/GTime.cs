@@ -4,8 +4,7 @@ namespace Assistente.Grammatics.Grammars
 {
     internal sealed class GTime : GrammarBase
     {
-        internal GTime(GrammarType grammarType)
-            : base(grammarType.ToString(), GetGrammarPoints()) { }
+        internal GTime() : base(GrammarType.Time.ToString(), GetGrammarPoints()) { }
 
         private static List<GrammarPoint> GetGrammarPoints() => new List<GrammarPoint>()
         {

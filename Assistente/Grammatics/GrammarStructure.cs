@@ -8,10 +8,9 @@ namespace Assistente.Grammatics
         {
             switch (grammarType)
             {
-                case GrammarType.System: return new GSystem(grammarType);
-                case GrammarType.Time: return new GTime(grammarType);
-                case GrammarType.Programs: return new GPrograms(grammarType);
-                case GrammarType.Weather:
+                case GrammarType.System: return new GSystem();
+                case GrammarType.Time: return new GTime();
+                case GrammarType.Programs: return new GProgram();
                 default: return null;
             }
         }
