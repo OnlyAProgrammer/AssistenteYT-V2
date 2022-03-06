@@ -26,5 +26,6 @@
         CloseProgram,
         DiscordMute,
         DiscordDesmute,
+        CommandsList,
     }
 }
