@@ -27,5 +27,6 @@
         DiscordMute,
         DiscordDesmute,
         CommandsList,
+        Temperature,
     }
 }

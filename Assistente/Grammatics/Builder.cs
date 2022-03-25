@@ -23,14 +23,26 @@ namespace Assistente.Grammatics
             "Estou aqui",
         };
 
+        internal static List<GrammarBase> GrammarBases = new List<GrammarBase>();
+
+        internal static GrammarBase GetGrammarByType(GrammarType grammarType)
+        {
+            foreach (var gb in GrammarBases)
+                if (gb.Name == grammarType.ToString()) return gb;
+
+            return null;
+        }
+
         internal static List<Grammar> GetGrammars()
         {
             var grammars = new List<Grammar>();
-            _ = GetVoiceCommands();
-            var grammarBases = GetGrammarBases();
+            GrammarBases = GetGrammarBases();
 
-            foreach (var gb in grammarBases)
+            foreach (var gb in GrammarBases)
             {
+                var gatt = (GrammarAttribute)gb.GetType().GetCustomAttribute(typeof(GrammarAttribute));
+                gb.GrammarPoints.AddRange(gatt.ExtractGrammarPoints());
+
                 var choices = new Choices();
 
                 foreach (var gp in gb.GrammarPoints)
@@ -48,9 +60,8 @@ namespace Assistente.Grammatics
         internal static CommandOrganizer GetVoiceCommands()
         {
             var voiceCommandsDict = new Dictionary<string, Dictionary<string, List<string>>>();
-            var grammars = GetGrammarBases();
-
-            foreach (var g in grammars)
+   
+            foreach (var g in GrammarBases)
             {
                 var commands = new Dictionary<string, List<string>>();
 
@@ -68,11 +79,11 @@ namespace Assistente.Grammatics
             var nspace = "Assistente.Grammatics.Grammars";
 
             var typeList = (from o in Assembly.GetExecutingAssembly().GetTypes()
-                            where o.IsClass && o.Namespace == nspace
+                            where Attribute.IsDefined(o, typeof(GrammarAttribute)) && o.Namespace == nspace
                             select o).ToArray();
 
             return (from gType in typeList 
                     select (GrammarBase)Activator.CreateInstance(gType, true)).ToList();
-        }
+        }   
     }
 }

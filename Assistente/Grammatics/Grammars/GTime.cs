@@ -1,20 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Assistente.Grammatics.Grammars
+﻿namespace Assistente.Grammatics.Grammars
 {
+    [Grammar(typeof(GTime))]
     internal sealed class GTime : GrammarBase
     {
-        internal GTime() : base(GrammarType.Time.ToString(), GetGrammarPoints()) { }
+        public GTime() : base(GrammarType.Time.ToString()) { }
 
-        private static List<GrammarPoint> GetGrammarPoints() => new List<GrammarPoint>()
-        {
-            GetWhatTimeIsGrammarPoint(),
-            GetWhatDateIsGrammarPoint(),
-            GetWhatDayIsGrammarPoint(),
-            GetWhatDayOfWeekIsGrammarPoint(),
-        };
-
-        private static GrammarPoint GetWhatTimeIsGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetWhatTimeIsGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -26,7 +18,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.WhatHourIs);
         }
 
-        private static GrammarPoint GetWhatDateIsGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetWhatDateIsGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -38,7 +31,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.WhatDateIs);
         }
 
-        private static GrammarPoint GetWhatDayIsGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetWhatDayIsGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -50,7 +44,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.WhatDayIs);
         }
 
-        private static GrammarPoint GetWhatDayOfWeekIsGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetWhatDayOfWeekIsGrammarPoint()
         {
             var inputs = new string[]
             {

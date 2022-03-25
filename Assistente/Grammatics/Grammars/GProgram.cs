@@ -4,19 +4,10 @@ using System.Collections.Generic;
 
 namespace Assistente.Grammatics.Grammars
 {
+    [Grammar(typeof(GProgram))]
     internal sealed class GProgram : GrammarBase
     {
-        internal GProgram() : base(GrammarType.Programs.ToString(), GetGrammarPoints(), GetGrammarChainPoints()) { }
-
-        private static List<GrammarPoint> GetGrammarPoints()
-        {
-            return new List<GrammarPoint>()
-            {
-                GetDiscordMuteGrammarPoint(),
-                GetDiscordDesmuteGrammarPoint(),
-                GetCommandsListGrammarPoint(),
-            };
-        }
+        public GProgram() : base(GrammarType.Programs.ToString(), GetGrammarChainPoints()) { }
 
         private static List<GrammarChainPoint> GetGrammarChainPoints()
         {
@@ -37,29 +28,6 @@ namespace Assistente.Grammatics.Grammars
                 openProgramsChain,
                 closeProgramsChain,
             };
-        }
-
-        // GrammarPoints
-        private static GrammarPoint GetDiscordMuteGrammarPoint()
-        {
-            var inputs = new string[]
-            {
-                "Mutar discord",
-                "Mute discord",
-            };
-
-            return new GrammarPoint(inputs, GrammarSubType.DiscordMute);
-        }
-
-        private static GrammarPoint GetDiscordDesmuteGrammarPoint()
-        {
-            var inputs = new string[]
-            {
-                "Desmutar discord",
-                "Desmute discord",
-            };
-
-            return new GrammarPoint(inputs, GrammarSubType.DiscordDesmute);
         }
 
         private static GrammarPoint GetOpenProgramGrammarPoint()
@@ -103,7 +71,33 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.Null);
         }
 
-        private static GrammarPoint GetCommandsListGrammarPoint()
+        // GrammarPoints
+        [GrammarPointReturnable]
+        public static GrammarPoint GetDiscordMuteGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Mutar discord",
+                "Mute discord",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.DiscordMute);
+        }
+
+        [GrammarPointReturnable]
+        public static GrammarPoint GetDiscordDesmuteGrammarPoint()
+        {
+            var inputs = new string[]
+            {
+                "Desmutar discord",
+                "Desmute discord",
+            };
+
+            return new GrammarPoint(inputs, GrammarSubType.DiscordDesmute);
+        }
+
+        [GrammarPointReturnable]
+        public static GrammarPoint GetCommandsListGrammarPoint()
         {
             var inputs = new string[]
             {

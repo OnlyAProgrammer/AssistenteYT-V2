@@ -4,10 +4,10 @@ namespace Assistente.Grammatics
 {
     internal abstract class GrammarBase
     {
-        protected GrammarBase(string name, List<GrammarPoint> grammarPoints, List<GrammarChainPoint> grammarChain = null)
+        protected GrammarBase(string name, List<GrammarChainPoint> grammarChain = null)
         {
             Name = name;
-            GrammarPoints = grammarPoints;
+            GrammarPoints = new List<GrammarPoint>();
             GrammarChain = grammarChain;
 
             if (grammarChain != null)
