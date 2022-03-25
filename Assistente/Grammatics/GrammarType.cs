@@ -5,5 +5,6 @@
         Programs,
         System,
         Time,
+        Weather
     }
 }

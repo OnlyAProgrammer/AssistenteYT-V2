@@ -37,7 +37,7 @@ namespace Assistente.Execution
                     return ConvertArgument(args).ToString();
 
                 case GrammarSubType.CommandsList: return CommandType.x0ShowCommandListSystem.ToString();
-
+                case GrammarSubType.Temperature: return CommandType.x0Temperature.ToString();
                 default: return "Entrada de sub-gramatica inválida";
             }
         }
@@ -96,13 +96,15 @@ namespace Assistente.Execution
                         result = "Lista de comandos iniciada";
                         break;
                     }
+                case CommandType.x0OpenProgram: result = "Sucesso ao abrir"; break;
+                case CommandType.x0CloseProgram: result = "Sucesso ao fechar"; break;
                 default:
                     result = "Sem função especificada para esse comando";
                     break;
             }
         }
 
-        private static object GetDayOfWeekTranslate(DayOfWeek dayOfWeek)
+        private static string GetDayOfWeekTranslate(DayOfWeek dayOfWeek)
         {
             switch (dayOfWeek)
             {
@@ -122,16 +124,14 @@ namespace Assistente.Execution
             if (args[0] == "OpenProgram")
             {
                 var sucess = ProgramManagement.OpenProgram(args[1], bool.Parse(args[2]));
-                // TODO
-
-                return CommandType.x0OpenProgram;
+                if (sucess)
+                    return CommandType.x0OpenProgram;
             }
             else if (args[0] == "CloseProgram")
             {
                 var sucess = ProgramManagement.CloseProgram(args[1]);
-                // TODO
-
-                return CommandType.x0CloseProgram;
+                if (sucess)
+                    return CommandType.x0CloseProgram;
             }
 
             return CommandType.x0InvalidCommand;

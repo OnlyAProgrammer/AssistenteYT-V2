@@ -56,7 +56,7 @@ namespace Assistente.View
                 LogPack.AddWarningLog($"TryParse falhou em extrair de '{grammarName}'", $"Parsing result: {grammarType}");
 
             var result = string.Empty;
-            var gGrammar = GrammarStructure.GetGrammarByType(grammarType);
+            var gGrammar = Builder.GetGrammarByType(grammarType);
 
             switch (RecognitionState)
             {

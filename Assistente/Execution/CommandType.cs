@@ -18,5 +18,6 @@
         x0DiscordDesmute,
         x0InvalidCommand,
         x0ShowCommandListSystem,
+        x0Temperature,
     }
 }

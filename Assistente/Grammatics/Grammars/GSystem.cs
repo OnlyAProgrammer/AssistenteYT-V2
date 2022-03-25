@@ -1,23 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Assistente.Grammatics.Grammars
+﻿namespace Assistente.Grammatics.Grammars
 {
+    [Grammar(typeof(GSystem))]
     internal sealed class GSystem : GrammarBase
     {
-        internal GSystem() : base(GrammarType.System.ToString(), GetGrammarPoints()) { }
+        public GSystem() : base(GrammarType.System.ToString()) { }
 
-        private static List<GrammarPoint> GetGrammarPoints() => new List<GrammarPoint>()
-        {
-            GetCallAssistenteGrammarPoint(),
-            GetSilenceModeGrammarPoint(),
-            GetTurnOfGrammarPoint(),
-            GetRestartGrammarPoint(),
-            GetDebugModeOnGrammarPoint(),
-            GetDebugModeOffGrammarPoint(),
-            GetVoiceChangeGrammarPoint(),
-        };
-
-        private static GrammarPoint GetCallAssistenteGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetCallAssistenteGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -27,7 +16,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.CallAssistente);
         }
 
-        private static GrammarPoint GetSilenceModeGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetSilenceModeGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -39,8 +29,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.SilenceMode);
         }
 
-
-        private static GrammarPoint GetTurnOfGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetTurnOfGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -53,7 +43,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.TurnOff);
         }
 
-        private static GrammarPoint GetRestartGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetRestartGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -66,7 +57,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.Restart);
         }
 
-        private static GrammarPoint GetDebugModeOnGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetDebugModeOnGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -78,7 +70,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.DebugModeOn);
         }
 
-        private static GrammarPoint GetDebugModeOffGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetDebugModeOffGrammarPoint()
         {
             var inputs = new string[]
             {
@@ -90,7 +83,8 @@ namespace Assistente.Grammatics.Grammars
             return new GrammarPoint(inputs, GrammarSubType.DebugModeOff);
         }
 
-        private static GrammarPoint GetVoiceChangeGrammarPoint()
+        [GrammarPointReturnable]
+        public static GrammarPoint GetVoiceChangeGrammarPoint()
         {
             var inputs = new string[]
             {
